@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <script type='text/javascript' src='jquery.min.js'></script>
+    <script type="text/javascript" src="js/jquery/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery/jquery-ui-1.8.17.custom.min.js"></script>
+    <script type="text/javascript" src="js/jspdf.js"></script>
+    <script type="text/javascript" src="js/adler32cs.js"></script>
+    <script type="text/javascript" src="js/FileSaver.js"></script>
+    <script type="text/javascript" src="js/Blob.js"></script>
+    <script type="text/javascript" src="js/jspdf.plugin.addimage.js"></script>
+    <script type="text/javascript" src="js/jspdf.plugin.standard_fonts_metrics.js"></script>
+    <script type="text/javascript" src="js/jspdf.plugin.split_text_to_size.js"></script>
+    <script type="text/javascript" src="js/jspdf.plugin.from_html.js"></script>
+    <script type="text/javascript">          
+        function pdfReporte( dato1 , dato2 , dato3, nombre )
+        {                  
+            doc = new jsPDF('p', 'pt', 'a4');
+            var width = doc.internal.pageSize.width;    
+            var height = doc.internal.pageSize.height;
+            
+            doc.setFontSize(40);
+            doc.addImage(dato1, 'JPEG', 0, 0, width, height);  
+
+            if(dato2 != "")
+            {
+                doc.addPage();
+                doc.addImage(dato2, 'JPEG', 0, 0, width, height);
+            }
+            
+            if(dato3 != "")
+            {
+                doc.addPage();
+                doc.addImage(dato3, 'JPEG', 0, 0, width, height);
+            }
+
+            doc.save(nombre + '.pdf');                                        
+            //gameInstance.SendMessage('ScriptPantalla', 'ActivarBotonTerminar');
+        }        
+    </script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>CloudLabs | %UNITY_WEB_NAME%</title>
+    <script src="%UNITY_WEBGL_LOADER_URL%"></script>
+    <script>
+      var gameInstance = UnityLoader.instantiate("gameContainer", "%UNITY_WEBGL_BUILD_URL%");
+    </script>
+    <style>
+      body { margin: 0; }
+      #gameContainer { width: 100vw; height: 100vh; }
+      canvas { width: 100%; height: 100%; }
+    </style>
+  </head>
+  <body>
+    <div id="gameContainer"></div>
+  </body>
+</html>
